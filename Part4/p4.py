@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((constants.Width, constants.Height))
 pygame.display.set_caption(constants.gameName)
 clock = pygame.time.Clock()
 
-carImg  = pygame.image.load('./Part3/assets/bigGreenCar.png')
+carImg  = pygame.image.load('./Part4/assets/bigGreenCar.png')
 
 def car(x,y):
     screen.blit(carImg, (x, y))
@@ -19,6 +19,8 @@ y = (constants.Height * 0.8)
 xChange = 0
 yChange = 0
 carSpeed = 0
+
+carWidth = 150 - 38
 
 while True:
     for event in pygame.event.get():
@@ -42,9 +44,14 @@ while True:
         
     x = x + xChange
     y = y + yChange
+
                     
     screen.fill(constants.white)
     car(x,y)
+        
+    if x > constants.Width - carWidth or x < 0:
+        pygame.quit()
+        exit()
         
     pygame.display.update()
     clock.tick(60)
