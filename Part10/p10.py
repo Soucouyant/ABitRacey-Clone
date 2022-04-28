@@ -47,6 +47,22 @@ def randomColor():
 def blockGen(blockX, blockY, blockW, blockH, color):
     pygame.draw.rect(screen, color, [blockX, blockY, blockW, blockH])
     
+def splashScreen():
+    intro = True
+    
+    while intro:
+        for event in pygame.event.get():
+            #print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        screen.fill(constants.white)
+        TextSurf, TextRect = textObj("A bit Racey", roboto)
+        TextRect.center = ((constants.Width/2), (constants.Height/2))
+        screen.blit(TextSurf, TextRect)
+        pygame.display.update()
+        clock.tick(15)
+    
 def gameLoop():
     x = (constants.Width * 0.45)
     y = (constants.Height * 0.627)
@@ -109,4 +125,5 @@ def gameLoop():
         clock.tick(60)
         
 # Run Game
+splashScreen()
 gameLoop()
