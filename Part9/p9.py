@@ -16,6 +16,20 @@ screen.fill(black)
 pixArr = pygame.PixelArray(screen)
 pixArr[0][0] = green
 
+pygame.draw.line(screen, blue, (100,200), (300,400), 5)
+
+pygame.draw.rect(screen, red, (100, 200, 50, 100))
+
+pygame.draw.circle(screen, white, (950, 600), 20)
+
+points = (
+    (15,20),
+    (100,20),
+    (819,412),
+    (241,529)
+)
+pygame.draw.polygon(screen, green, points)
+
 # Game Loop
 while True:
     for event in pygame.event.get():
