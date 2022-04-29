@@ -13,6 +13,10 @@ clock = pygame.time.Clock()
 carImg  = pygame.image.load('./Part15/assets/bigGreenCar.png')
 roboto = pygame.font.Font('./Part15/assets/Roboto-Black.ttf', 27)
 
+def exitGame():
+    pygame.quit()
+    exit()
+
 def blocksDodged(count):
     text = roboto.render("Dodged: "+str(count), True, constants.black)
     screen.blit(text, (0,0)) 
@@ -48,11 +52,7 @@ def buttons(msg,x,y,w,h,ic,ac,action=None):
     if x+w > mousePos[0] > x and y+h > mousePos[1] > y:
         pygame.draw.rect(screen, ac, (x,y,w,h))
         if click[0] == True:
-            if action == "play":
-                gameLoop()
-            elif action == "quit":
-                pygame.quit()
-                exit()
+            action()
     else: 
         pygame.draw.rect(screen, ic, (x,y,w,h))
         
@@ -64,13 +64,11 @@ def buttons(msg,x,y,w,h,ic,ac,action=None):
     )
     screen.blit(textSurf,textRect)
 
-# Basically a useless function
-def randomColor():
-    r = random.randrange(0,255)
-    g = random.randrange(0,255)
-    b = random.randrange(0,255)
-    return r,g,b
-#end
+# def randomColor():
+#     r = random.randrange(0,255)
+#     g = random.randrange(0,255)
+#     b = random.randrange(0,255)
+#     return r,g,b
 
 def blockGen(blockX, blockY, blockW, blockH, color):
     pygame.draw.rect(screen, color, [blockX, blockY, blockW, blockH])
@@ -82,8 +80,7 @@ def splashScreen():
         for event in pygame.event.get():
             #print(event)
             if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+                exitGame()
                 
         screen.fill(constants.white)
         TextSurf, TextRect = textObj("A bit Racey", roboto)
@@ -91,8 +88,8 @@ def splashScreen():
         screen.blit(TextSurf, TextRect)
         
         # Button Function Calls
-        buttons("GO!", 150,350,100,50,constants.green,constants.lightGreen,"play")
-        buttons("Exit",550,350,100,50,constants.red,constants.lightRed,"exit")
+        buttons("GO!", 150,350,100,50,constants.green,constants.lightGreen,gameLoop)
+        buttons("Exit",550,350,100,50,constants.red,constants.lightRed,exitGame)
         
         pygame.display.update()
         clock.tick(15)
@@ -116,8 +113,7 @@ def gameLoop():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
+                exitGame()
 
             # Movement Handler
             if event.type == pygame.KEYDOWN:
