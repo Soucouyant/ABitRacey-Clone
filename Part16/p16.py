@@ -41,7 +41,21 @@ def textDisplay(text):
     gameLoop()
     
 def crash():
-    pass
+    TextSurf, TextRect = textObj("You Crashed!", roboto)
+    TextRect.center = ((constants.Width/2), (constants.Height/2.5))
+    screen.blit(TextSurf, TextRect)
+    
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exitGame()
+        
+        # Button Function Calls
+        buttons("Play Again", 150,350,150,50,constants.green,constants.lightGreen,gameLoop)
+        buttons("Exit",550,350,100,50,constants.red,constants.lightRed,exitGame)
+        
+        pygame.display.update()
+        clock.tick(15)
     
 # Add params
 def buttons(msg,x,y,w,h,ic,ac,action=None):
@@ -176,6 +190,7 @@ def gameLoop():
         
         if y < blockStartY+blockHeight:  
             if x > blockStartX and x < blockStartX+blockWidth or x+carWidth > blockStartX and x + carWidth < blockStartX + blockWidth:
+                paused = True
                 crash()
             
        
