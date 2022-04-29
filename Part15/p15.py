@@ -10,8 +10,8 @@ screen = pygame.display.set_mode((constants.Width, constants.Height))
 pygame.display.set_caption(constants.gameName)
 clock = pygame.time.Clock()
 
-carImg  = pygame.image.load('./Part14/assets/bigGreenCar.png')
-roboto = pygame.font.Font('./Part14/assets/Roboto-Black.ttf', 27)
+carImg  = pygame.image.load('./Part15/assets/bigGreenCar.png')
+roboto = pygame.font.Font('./Part15/assets/Roboto-Black.ttf', 27)
 
 def blocksDodged(count):
     text = roboto.render("Dodged: "+str(count), True, constants.black)
@@ -39,13 +39,20 @@ def crash():
     textDisplay('You Crashed!')
     
 # Add params
-def buttons(msg,x,y,w,h,ic,ac):
+def buttons(msg,x,y,w,h,ic,ac,action=None):
     # Mouse Pos
     mousePos = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
     
     # Change in Color
     if x+w > mousePos[0] > x and y+h > mousePos[1] > y:
         pygame.draw.rect(screen, ac, (x,y,w,h))
+        if click[0] == True:
+            if action == "play":
+                gameLoop()
+            elif action == "quit":
+                pygame.quit()
+                exit()
     else: 
         pygame.draw.rect(screen, ic, (x,y,w,h))
         
@@ -84,8 +91,8 @@ def splashScreen():
         screen.blit(TextSurf, TextRect)
         
         # Button Function Calls
-        buttons("GO!", 150,350,100,50,constants.green,constants.lightGreen)
-        buttons("Exit",550,350,100,50,constants.red,constants.lightRed)
+        buttons("GO!", 150,350,100,50,constants.green,constants.lightGreen,"play")
+        buttons("Exit",550,350,100,50,constants.red,constants.lightRed,"exit")
         
         pygame.display.update()
         clock.tick(15)
