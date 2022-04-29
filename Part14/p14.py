@@ -38,6 +38,39 @@ def textDisplay(text):
 def crash():
     textDisplay('You Crashed!')
     
+# Add params
+def buttons():
+    # Buttons
+    mousePos = pygame.mouse.get_pos()
+        
+    # Interactive Green
+    if 150+100 > mousePos[0] > 150 and 350+50 > mousePos[1] > 350:
+        pygame.draw.rect(screen, constants.lightGreen,(150,350,100,50))
+    else: 
+        pygame.draw.rect(screen, constants.green,(150,350,100,50))
+            
+    # Interactive Red
+    if 550+100 > mousePos[0] > 550 and 350+50 > mousePos [1] > 350:
+        pygame.draw.rect(screen, constants.lightRed,(550,350,100,50))
+    else:
+        pygame.draw.rect(screen, constants.red,(550,350,100,50))
+        
+    # Green Text
+    textSurf, textRect = textObj("GO!",roboto)
+    textRect.center = (
+        (150+(100/2)),
+        (350+(50/2))
+        )
+    screen.blit(textSurf,textRect)
+        
+    # Red Text
+    textSurf, textRect = textObj("Exit", roboto)
+    textRect.center = (
+        (550+(100/2)),
+        (350+(50/2))
+    )
+    screen.blit(textSurf,textRect)
+    
 def randomColor():
     r = random.randrange(0,255)
     g = random.randrange(0,255)
@@ -62,37 +95,8 @@ def splashScreen():
         TextRect.center = ((constants.Width/2), (constants.Height/2.5))
         screen.blit(TextSurf, TextRect)
         
-        # Buttons
-        mousePos = pygame.mouse.get_pos()
+        # Button Function Calls
         
-        # Interactive Green
-        if 150+100 > mousePos[0] > 150 and 350+50 > mousePos[1] > 350:
-            pygame.draw.rect(screen, constants.lightGreen,(150,350,100,50))
-        else: 
-            pygame.draw.rect(screen, constants.green,(150,350,100,50))
-            
-        # Interactive Red
-        if 550+100 > mousePos[0] > 550 and 350+50 > mousePos [1] > 350:
-            pygame.draw.rect(screen, constants.lightRed,(550,350,100,50))
-        else:
-            pygame.draw.rect(screen, constants.red,(550,350,100,50))
-        
-        # Green Text
-        textSurf, textRect = textObj("GO!",roboto)
-        textRect.center = (
-            (150+(100/2)),
-            (350+(50/2))
-            )
-        screen.blit(textSurf,textRect)
-        
-        # Red Text
-        textSurf, textRect = textObj("Exit", roboto)
-        textRect.center = (
-            (550+(100/2)),
-            (350+(50/2))
-        )
-        screen.blit(textSurf,textRect)
-                
         pygame.display.update()
         clock.tick(15)
     
