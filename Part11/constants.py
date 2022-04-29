@@ -1,5 +1,5 @@
 Width = 800
-Height = 400
+Height = 600
 gameName = 'A Bit Racey'
 black = (0,0,0)
 white = (255,255,255)

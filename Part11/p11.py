@@ -56,14 +56,15 @@ def splashScreen():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+                
         screen.fill(constants.white)
         TextSurf, TextRect = textObj("A bit Racey", roboto)
-        TextRect.center = ((constants.Width/2), (constants.Height/2))
+        TextRect.center = ((constants.Width/2), (constants.Height/2.5))
         screen.blit(TextSurf, TextRect)
         
         # Buttons
-        pygame.draw.rect(screen, constants.red, (150,450,100,50)) # Red
-        pygame.draw.rect(screen, constants.green, (550,450,100,50)) # Green
+        pygame.draw.rect(screen, constants.green,(150,350,100,50)) # Green
+        pygame.draw.rect(screen, constants.red,(550,350,100,50)) # Red
         
         pygame.display.update()
         clock.tick(15)
