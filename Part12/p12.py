@@ -1,4 +1,3 @@
-from pydoc import ModuleScanner
 import pygame
 import constants
 import time
