@@ -39,35 +39,21 @@ def crash():
     textDisplay('You Crashed!')
     
 # Add params
-def buttons():
-    # Buttons
+def buttons(msg,x,y,w,h,ic,ac):
+    # Mouse Pos
     mousePos = pygame.mouse.get_pos()
         
-    # Interactive Green
-    if 150+100 > mousePos[0] > 150 and 350+50 > mousePos[1] > 350:
-        pygame.draw.rect(screen, constants.lightGreen,(150,350,100,50))
+    # Change in Color
+    if x+w > mousePos[0] > x and y+h > mousePos[1] > y:
+        pygame.draw.rect(screen, ac, (x,y,w,h))
     else: 
-        pygame.draw.rect(screen, constants.green,(150,350,100,50))
-            
-    # Interactive Red
-    if 550+100 > mousePos[0] > 550 and 350+50 > mousePos [1] > 350:
-        pygame.draw.rect(screen, constants.lightRed,(550,350,100,50))
-    else:
-        pygame.draw.rect(screen, constants.red,(550,350,100,50))
+        pygame.draw.rect(screen, ic, (x,y,w,h))
         
-    # Green Text
-    textSurf, textRect = textObj("GO!",roboto)
+    # Button Text
+    textSurf, textRect = textObj(msg, roboto)
     textRect.center = (
-        (150+(100/2)),
-        (350+(50/2))
-        )
-    screen.blit(textSurf,textRect)
-        
-    # Red Text
-    textSurf, textRect = textObj("Exit", roboto)
-    textRect.center = (
-        (550+(100/2)),
-        (350+(50/2))
+        (x+(w/2)),
+        (y+(h/2))
     )
     screen.blit(textSurf,textRect)
     
@@ -96,6 +82,8 @@ def splashScreen():
         screen.blit(TextSurf, TextRect)
         
         # Button Function Calls
+        buttons("GO!", 150,350,100,50,constants.green,constants.lightGreen)
+        buttons("Exit",550,350,100,50,constants.red,constants.lightRed)
         
         pygame.display.update()
         clock.tick(15)
