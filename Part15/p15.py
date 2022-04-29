@@ -93,9 +93,6 @@ def splashScreen():
         
         pygame.display.update()
         clock.tick(15)
-
-def pauseScreen():
-    pass
     
 def gameLoop():
     x = (constants.Width * 0.45)

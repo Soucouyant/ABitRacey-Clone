@@ -10,8 +10,9 @@ screen = pygame.display.set_mode((constants.Width, constants.Height))
 pygame.display.set_caption(constants.gameName)
 clock = pygame.time.Clock()
 
-carImg  = pygame.image.load('./Part15/assets/bigGreenCar.png')
-roboto = pygame.font.Font('./Part15/assets/Roboto-Black.ttf', 27)
+carImg  = pygame.image.load('./Part16/assets/bigGreenCar.png')
+roboto = pygame.font.Font('./Part16/assets/Roboto-Black.ttf', 27)
+paused = False
 
 def exitGame():
     pygame.quit()
@@ -40,7 +41,7 @@ def textDisplay(text):
     gameLoop()
     
 def crash():
-    textDisplay('You Crashed!')
+    pass
     
 # Add params
 def buttons(msg,x,y,w,h,ic,ac,action=None):
@@ -93,8 +94,32 @@ def splashScreen():
         
         pygame.display.update()
         clock.tick(15)
+
+def unpause():
+    global paused
+    paused = False
+
+def pause():
+    screen.fill(constants.white)
+    TextSurf, TextRect = textObj("Game Paused", roboto)
+    TextRect.center = ((constants.Width/2), (constants.Height/2.5))
+    screen.blit(TextSurf, TextRect)
+    
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exitGame()
+        
+        # Button Function Calls
+        buttons("Cont.", 150,350,100,50,constants.green,constants.lightGreen,unpause)
+        buttons("Exit",550,350,100,50,constants.red,constants.lightRed,exitGame)
+        
+        pygame.display.update()
+        clock.tick(15)
     
 def gameLoop():
+    global paused
+    
     x = (constants.Width * 0.45)
     y = (constants.Height * 0.627)
 
@@ -121,6 +146,9 @@ def gameLoop():
                     xChange = -5
                 if event.key == pygame.K_RIGHT:
                     xChange = 5
+                if event.key == pygame.K_ESCAPE:
+                    paused = True
+                    pause()
                     
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or pygame.K_RIGHT:
