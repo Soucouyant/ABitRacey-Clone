@@ -1,3 +1,7 @@
+# Duran Ramlall 
+# Pygame Tutorial Set #2 - A Bit Race P1
+# Wednesday April 13 2022
+# TEJ4M1 P2   
 import pygame
 from sys import exit
 
